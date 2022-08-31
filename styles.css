@@ -1,0 +1,203 @@
+body {
+  font-family: "Rajdhani", sans-serif;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(43, 199, 90);
+  color: #fff;
+  padding: 2.5rem;
+  height: 10vh;
+}
+
+.header > h2 {
+  font-size: clamp(2.2rem, 2.3vw, 2.8rem);
+  font-weight: 700;
+  text-shadow: 1px 1px 2px green;
+  margin: 0.7rem 0;
+}
+
+.header > button {
+  padding: 0.5rem 1.5rem;
+  border: 2px solid rgb(212, 255, 144);
+  border-radius: 10px;
+  background-color: transparent;
+  color: rgb(212, 255, 144);
+  font-family: inherit;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all ease-in 0.15s;
+}
+
+.header > button:hover {
+  outline: none;
+  color: #fff;
+  border-color: #fff;
+}
+
+/* .books-container {
+  background: rgb(211, 255, 138);
+  background: linear-gradient(
+    230deg,
+    rgba(211, 255, 138, 1) 0%,
+    rgba(107, 233, 179, 1) 100%
+  );
+} */
+
+form {
+  width: min(300px, 80%);
+  margin: 0 auto;
+  padding: 3rem 3.5rem 4rem;
+  border: 2px solid rgb(43, 199, 90);
+  border-radius: 15px;
+  box-shadow: 0px 2px 10px rgba(107, 233, 179, 1);
+  background-color: #fff;
+  position: fixed;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+}
+
+form.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  transition: 200ms ease-in-out;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+form > .form-row {
+  margin: 1rem 0;
+}
+
+form > h2 {
+  font-size: clamp(1.3rem 2vw 1.8rem);
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.form-row > input {
+  width: 80%;
+  padding: 0.7rem;
+  margin: 0.2rem;
+  border-radius: 10px;
+  border: 1px solid rgb(43, 199, 90);
+  font-family: inherit;
+  font-size: 1.1rem;
+}
+
+.form-row > input:focus {
+  outline: none;
+}
+
+.form-row > select {
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 1px solid rgb(43, 199, 90);
+  font-family: inherit;
+}
+
+.form-row > select:focus {
+  outline: none;
+}
+
+form > button {
+  padding: 0.6rem 2.2rem;
+  margin-right: 0.5rem;
+  border: 2px solid rgb(43, 199, 90);
+  background-color: transparent;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all ease-in-out 0.15s;
+}
+
+form > button:hover {
+  background-color: rgb(43, 199, 90);
+  color: #fff;
+}
+
+.books {
+  margin: 2.5rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-flow: row;
+  grid-gap: 30px;
+  max-width: 100%;
+}
+
+.unique-book {
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+}
+
+.unique-book > p {
+  margin: 0.7rem;
+  padding: 0.5rem;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.unique-book > button {
+  margin: 0.7rem;
+  padding: 0.6rem 1.2rem;
+  border: 2px solid rgb(43, 199, 90);
+  background-color: transparent;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all ease-in-out 0.15s;
+}
+
+.unique-book > button:hover {
+  background-color: rgb(43, 199, 90);
+  color: #fff;
+}
+
+span.bookStatus {
+  padding: 0.5rem;
+  border: 1px solid #000;
+  margin-left: 2rem;
+  cursor: pointer;
+}
+
+.unique-book.read {
+  background-color: lightgreen;
+}
+
+@media (min-width: 720px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .header > button {
+    padding: 1rem 2rem;
+  }
+}
