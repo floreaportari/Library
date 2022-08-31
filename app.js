@@ -1,41 +1,84 @@
+const addBtn = document.querySelector("#addBtn");
+const cancelBtn = document.querySelector("#cancelBtn");
+const form = document.querySelector("#form");
+const overlay = document.querySelector("#overlay");
+const bookTitle = document.querySelector("#bookTitle");
+const bookAuthor = document.querySelector("#bookAuthor");
+const bookPages = document.querySelector("#bookPages");
+const booksContainer = document.querySelector(".books");
+const bookRead = document.querySelector("#bookRead");
+
 let myLibrary = [];
-const libraryContainer = document.querySelector(".library-container");
 
-let bookTitle = prompt("What is your fav book?");
-let bookAuthor = prompt("Who is the author?");
-let bookPages = prompt("How many pages does it have?");
-let hasReadBook = prompt("Have you read the book?");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  addBookToLibrary();
+  closeForm();
+});
 
-function Book(title, author, numPages, hasRead) {
+addBtn.addEventListener("click", () => {
+  form.classList.add("active");
+  overlay.classList.add("active");
+});
+
+overlay.addEventListener("click", closeForm);
+cancelBtn.addEventListener("click", closeForm);
+
+function closeForm() {
+  form.classList.remove("active");
+  overlay.classList.remove("active");
+}
+
+function Book(title, author, numPages) {
   this.title = title;
   this.author = author;
   this.pages = numPages;
-  this.hasRead = hasRead;
-  this.info = function () {
-    console.log(
-      `${this.title} by ${this.author}, ${this.pages} pages, and ${
-        this.hasRead === "yes" ? "have read" : "have not read"
-      }`
-    );
-  };
 }
 
 function addBookToLibrary() {
   const newBook = new Book(
-    `${bookTitle}`,
-    `${bookAuthor}`,
-    `${bookPages}`,
-    `${hasReadBook}`
+    `${bookTitle.value}`,
+    `${bookAuthor.value}`,
+    `${bookPages.value}`
   );
-  newBook.info();
+
+  const newDiv = document.createElement("div");
+  newDiv.classList.add("unique-book");
+  const title = document.createElement("p");
+  const author = document.createElement("p");
+  const pages = document.createElement("p");
+  const status = document.createElement("span");
+  const removeBtn = document.createElement("button");
+  removeBtn.textContent = "Remove Book";
+
+  title.textContent = `Title: ${bookTitle.value}`;
+  author.textContent = `Author: ${bookAuthor.value}`;
+  pages.textContent = `Pages: ${bookPages.value}`;
+
+  status.textContent = `${bookRead.value === "read" ? "Read" : "Unread"}`;
+  status.classList.add("bookStatus");
+
+  status.addEventListener("click", () => {
+    newDiv.classList.toggle("read");
+    status.textContent = `${
+      newDiv.classList.contains("read") ? "Read" : "Unread"
+    }`;
+  });
+
+  newDiv.appendChild(title);
+  newDiv.appendChild(author);
+  newDiv.appendChild(pages);
+  newDiv.appendChild(removeBtn);
+  newDiv.appendChild(status);
+
+  booksContainer.appendChild(newDiv);
   myLibrary.push(newBook);
-  console.log(myLibrary);
 
   myLibrary.forEach((book) => {
-    const newH1 = document.createElement("h1");
-    newH1.textContent = `${book.title} by ${book.author} has ${book.pages}. I ${book.hasRead} the book!`;
-    libraryContainer.appendChild(newH1);
+    console.log(book);
+  });
+
+  removeBtn.addEventListener("click", () => {
+    booksContainer.removeChild(newDiv);
   });
 }
-
-addBookToLibrary();
